@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-'''Base Model Module'''
+'''Base Model Module For the project'''
 
-import models
+from models import storage 
 from uuid import uuid4
 from datetime import datetime
 
@@ -11,6 +11,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Constructor"""
+
         datenow = datetime.now()
         if kwargs:
             for k, v in kwargs.items():
@@ -26,17 +27,21 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
+
         """String representation"""
+
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
                                      self.__dict__)
 
     def save(self):
         """Updates the updated_at public instance attribute"""
+
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """Convert object to dictionary representation"""
+
         dct = self.__dict__.copy()
         dct['__class__'] = self.__class__.__name__
         dct['created_at'] = self.created_at.isoformat()
