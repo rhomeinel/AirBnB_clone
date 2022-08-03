@@ -48,4 +48,3 @@ This allows the storage to be reloaded automatically at initialization, which re
 # AUTHOR
 - Norris Selorm Bedzo | bedzon@ieee.org | [GitHub](https://github.com/bedzon94)
 - Rhomeinel Nelson | rhomeinel@gmail.com | [GitHub](https://github.com/rhomeinel)
-
