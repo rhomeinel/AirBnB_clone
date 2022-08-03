@@ -53,15 +53,15 @@ class HBNBCommand(cmd.Cmd):
         elif inpu[0]in self.class_list:
             if len(inpu) < 2:
                 print("** instance id missing **")
-        else:
-            key = "{}.{}".format(inpu[0], inpu[1])
-            if key in storage.all():
-                print(""{}".format(storage.all)[key]")
+            else:
+                key = "{}.{}".format(inpu[0], inpu[1])
+                if key in storage.all():
+                    print("{}".format(storage.all[key]))
                 else:
-                    print(" no instance found ")
-         else:
-            print(" class doesn't exist ")
-
+                    print("** no instance found **")
+        else:
+            print("** class doesn't exist **")
+    
 
 
 
