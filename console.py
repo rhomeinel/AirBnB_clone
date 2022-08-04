@@ -3,7 +3,7 @@
 
 import cmd
 import sys
-from model.base_model import BaseModel
+from models.base_model import BaseModel
 from model import storage
 
 
@@ -85,11 +85,22 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def do_all(self, line):
+    def do_all(self, line=""):
         """
         Prints all string representation of all instances based
         or not on the class name
         """
+        if line:
+            if line in HBNBCommand.myClasses.keys():
+                for key, value in (storage.all()).items():
+                    if line in key:
+                        print(value)
+            else:
+                print("** class doesn't exist **")
+        else:
+            for value in storage.all().values():
+                print(value)
+
     def do_update(self, line):
         """
         Updates an instance based on the class name and id
@@ -114,8 +125,8 @@ class HBNBCommand(cmd.Cmd):
                     objs[key].save()
                 else:
                     print("**no instance found**")
-            else:
-                print("**class doesn't exist**")
+        else:
+            print("**class doesn't exist**")
 
 
 if __name__ == '__main__':
