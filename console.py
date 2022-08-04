@@ -6,6 +6,7 @@ import sys
 from model.base_model import BaseModel
 from model import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """
     The class HBNBCommand
@@ -84,12 +85,37 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    #def do_all(self, line):
+    def do_all(self, line):
         """
         Prints all string representation of all instances based
         or not on the class name
         """
-
+    def do_update(self, line):
+        """
+        Updates an instance based on the class name and id
+        by adding or updating attribute(save the change into the JSON file)
+        """
+        inpu = line.slip()
+        if line == "" or line is None:
+            print("** class name missing **")
+        elif inpu[0] in self.class_list:
+            if len(inpu) < 2:
+                print("**instance id missing**")
+            elif len(inpu) < 3:
+                print("**attribute name missing**")
+            elif len(inpu) < 4:
+                print("**value missing**")
+            else:
+                key = "{}.{}".format(inpu[0], inpu[1])
+                if key in storage.all():
+                    if type(inpu[3]) is dict:
+                        storage.all()[key].setattr(inpu[2], inpu[3])
+                    objs[key].__setattr__(inpu[2], inpu[3])
+                    objs[key].save()
+                else:
+                    print("**no instance found**")
+            else:
+                print("**class doesn't exist**")
 
 
 if __name__ == '__main__':
