@@ -3,8 +3,9 @@
 
 import cmd
 import sys
-from models.base_model import BaseModel
-from model import storage
+import os
+import json
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,6 +16,7 @@ class HBNBCommand(cmd.Cmd):
 
     intro = "Welcome to The Console"
     prompt = "(hbnb) "
+    class_list = models.storage.references()
 
     def do_quit(self, line):
         """Quit command to exit the HBNB console"""
@@ -35,14 +37,14 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id.
         """
-        if line == "" or line is None:
+        if not line:
             print("** class name missing **")
-        elif line not in BaseModel:
-            print("** class doesn't exist **")
+        elif line in self.class_list:
+            obj = self.class_list[line]()
+            obj.save()
+            print("{}".format(obj.id))
         else:
-            new_model = BaseModel()
-            new_model.save()
-            print("{}".format(new_model.id))
+            print("** class doesn't exist **")
 
     def do_show(self, line):
         """
