@@ -3,17 +3,6 @@
 
 import cmd
 import sys
-import os
-import json
-import models
-from models.user import User
-from models.amenity import Amenity
-from models.review import Review
-from models.state import State
-from models.place import Place
-from models.base_model import BaseModel
-from models.city import City
-from models.engine.file_storage import FileStor
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,7 +13,6 @@ class HBNBCommand(cmd.Cmd):
 
     intro = "Welcome to The Console"
     prompt = "(hbnb) "
-    class_list = models.storage.references()
 
     def do_quit(self, line):
         """Quit command to exit the HBNB console"""
@@ -47,10 +35,12 @@ class HBNBCommand(cmd.Cmd):
         """
         if not line:
             print("** class name missing **")
-        elif line in self.class_list:
-            obj = self.class_list[line]()
-            obj.save()
-            print("{}".format(obj.id))
+        elif line in class_check:
+            _input = line.split()
+            new_obj = class_check[_input[0]]()
+            new_obj.save()
+            storage.reload()
+            print(new_obj.id)
         else:
             print("** class doesn't exist **")
 
@@ -59,23 +49,28 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance
         based on the class name and id
         """
-        inpu = line.split()
-        models.storage.reload()
-        objs = models.storage.all()
-        key = ""
-        if not line:
-            print("** class name missing **")
-        elif inpu[0] in self.class_list:
-            if len(inpu) < 2:
-                print("** instance id missing **")
-            else:
-                key = "{}.{}".format(inpu[0], inpu[1])
-                if key in objs:
-                    print("{}".format(objs[key]))
-                else:
-                    print("** no instance found **")
-        else:
+        inpu = line.slip()
+        switch = 0
+        switch1 = 0
+        objects = storage.all()
+        if inpu[0] not in class_check:
             print("** class doesn't exist **")
+        elif len(inpu) < 2:
+            num_list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            for letter in _input[0]:
+                if letter in num_list:
+                    switch1 = 1
+            if switch1 == 1:
+                print("** class name missing **")
+            else:
+                print("** instance id missing **")
+        elif len(inpu) == 2:
+            for key in objects.keys():
+                if key == inpu[1]:
+                    print(objects[key])
+                    switch = 1
+            if switch == 0:
+                print("** no instance found **")
 
     def do_destory(self, line):
         """
@@ -145,4 +140,6 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
+    class_check = {"Amenity", "BaseModel", "City" "Place", "Review",
+                   "State", "User"}
     HBNBCommand().cmdloop()
