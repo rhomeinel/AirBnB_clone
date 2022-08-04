@@ -59,11 +59,11 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance
         based on the class name and id
         """
-        inpu = inp.split()
+        inpu = line.split()
         models.storage.reload()
         objs = models.storage.all()
         key = ""
-        if not inp:
+        if not line:
             print("** class name missing **")
         elif inpu[0] in self.class_list:
             if len(inpu) < 2:
@@ -83,16 +83,18 @@ class HBNBCommand(cmd.Cmd):
         line.slip((save the change into the JSON file)
         """
         inpu = line.slip()
-        if line == "" or line is None:
+        objs = models.storage.all()
+        key = ""
+        if not inp:
             print("** class name missing **")
         elif inpu[0] in self.class_list:
             if len(inpu) < 2:
                 print("** instance id missing **")
             else:
                 key = "{}.{}".format(inpu[0], inpu[1])
-                if key in storage.all():
-                    storage.all().pop(key)
-                    storage.save()
+                if key in objs:
+                    objs.pop(key)
+                    models.storage.save()
                 else:
                     print("** no instance found **")
         else:
