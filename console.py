@@ -95,21 +95,18 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def do_all(self, line=""):
-        """
-        Prints all string representation of all instances based
-        or not on the class name
-        """
-        if line:
-            if line in HBNBCommand.myClasses.keys():
-                for key, value in (storage.all()).items():
-                    if line in key:
-                        print(value)
+    def do_all(self, usr_in):
+        _input = usr_in.split()
+        objects = storage.all()
+        for key in objects.keys():
+            if _input:
+                if _input[0] not in class_check:
+                    print("** class doesn't exist **")
+                    break
+                if _input[0] == objects[key].__dict__['__class__']:
+                    print(objects[key])
             else:
-                print("** class doesn't exist **")
-        else:
-            for value in storage.all().values():
-                print(value)
+                print(objects[key])
 
     def do_update(self, line):
         """
