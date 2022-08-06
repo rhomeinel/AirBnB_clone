@@ -64,14 +64,11 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print(storage.all()[key])
 
-    def do_destory(self, line):
+    def do_destroy(self, line):
         """
         Deletes an instance based on the class name and id
-        line.slip((save the change into the JSON file)
+        (save the change into the JSON file)
         """
-        inpu = line.slip()
-        objs = models.storage.all()
-        key = ""
         if line == "" or line is None:
             print("** class name missing **")
         else:
