@@ -103,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and id
         by adding or updating attribute(save the change into the JSON file)
         """
-        inpu = line.slip()
+        inpu = line.split()
         if line == "" or line is None:
             print("** class name missing **")
         elif inpu[0] in self.class_list:
