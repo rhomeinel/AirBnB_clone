@@ -7,18 +7,18 @@ from datetime import datetime
 
 
 class BaseModel:
-    """Class Base Model"""
+    """Class for the Base Model"""
 
     def __init__(self, *args, **kwargs):
-        """Constructor"""
+        """Initializes the Base instance"""
         datenow = datetime.now()
         if kwargs:
-            for k, v in kwargs.items():
-                if k == '__class__':
+            for key, value in kwargs.items():
+                if key == '__class__':
                     continue
-                if k in ['created_at', 'updated_at']:
-                    v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
-                self.__setattr__(k, v)
+                if key in ['created_at', 'updated_at']:
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                self.__setattr__(key, value)
         else:
             self.id = str(uuid4())
             self.created_at = datenow
@@ -26,7 +26,7 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """String representation"""
+        """String representation of an instance"""
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
                                      self.__dict__)
 
@@ -37,8 +37,8 @@ class BaseModel:
 
     def to_dict(self):
         """Convert object to dictionary representation"""
-        dct = self.__dict__.copy()
-        dct['__class__'] = self.__class__.__name__
-        dct['created_at'] = self.created_at.isoformat()
-        dct['updated_at'] = self.updated_at.isoformat()
+        dict = self.__dict__.copy()
+        dict['__class__'] = self.__class__.__name__
+        dict['created_at'] = self.created_at.isoformat()
+        dict['updated_at'] = self.updated_at.isoformat()
         return dct
