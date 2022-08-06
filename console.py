@@ -45,43 +45,55 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Prints the string representation of an instance.
         """
-        if line == "" or line is None:
-            print("** class name missing **")
-        else:
-            _input= line.split(' ')
-            if _input[0] not in class_check:
-                print("** class doesn't exist **")
-            elif len(_input) < 2:
-                print("** instance id missing **")
+        Prints the string representation of an instance
+        based on the class name and id
+        """
+        inpu = line.slip()
+        switch = 0
+        switch1 = 0
+        objects = storage.all()
+        if inpu[0] not in class_check:
+            print("** class doesn't exist **")
+        elif len(inpu) < 2:
+            num_list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            for letter in _input[0]:
+                if letter in num_list:
+                    switch1 = 1
+            if switch1 == 1:
+                print("** class name missing **")
             else:
-                key = "{}.{}".format(_input[0], _input[1])
-                if key not in storage.all():
-                    print("** no instance found **")
-                else:
-                    print(storage.all()[key])
+                print("** instance id missing **")
+        elif len(inpu) == 2:
+            for key in objects.keys():
+                if key == inpu[1]:
+                    print(objects[key])
+                    switch = 1
+            if switch == 0:
+                print("** no instance found **")
 
     def do_destory(self, line):
         """
         Deletes an instance based on the class name and id
         line.slip((save the change into the JSON file)
         """
-        if line == "" or line is None:
+        inpu = line.slip()
+        objs = models.storage.all()
+        key = ""
+        if not inp:
             print("** class name missing **")
-        else:
-            _input = line.split(' ')
-            if _input[0] not in class_check():
-                print("** class doesn't exist **")
-            elif len(_input) < 2:
+        elif inpu[0] in self.class_list:
+            if len(inpu) < 2:
                 print("** instance id missing **")
             else:
-                key = "{}.{}".format(_input[0], _input[1])
-                if key not in storage.all():
-                    print("** no instance found **")
+                key = "{}.{}".format(inpu[0], inpu[1])
+                if key in objs:
+                    objs.pop(key)
+                    models.storage.save()
                 else:
-                    del storage.all()[key]
-                    storage.save()
+                    print("** no instance found **")
+        else:
+            print("** class doesn't exist **")
 
     def do_all(self, usr_in):
         _input = usr_in.split()
