@@ -33,16 +33,14 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id.
         """
-        if not line:
-            print("** class name missing **")
-        elif line in class_check:
-            _input = line.split()
-            new_obj = class_check[_input[0]]()
-            new_obj.save()
-            storage.reload()
-            print(new_obj.id)
+        if line == "":
+            print("** class name is missing **")
+        elif line != "BaseModel":
+            print("** class does not exist **")
         else:
-            print("** class doesn't exist **")
+            new_model = BaseModel()
+            new_model.save()
+            print("{}".format(new_model.id))
 
     def do_show(self, line):
         """
@@ -86,7 +84,10 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, usr_in):
-        """Prints all string representation of all instances bases on a class name"""
+        """
+        Prints all string representation of all instances
+        bases on a class name
+        """
         if name:
             if name in class_check:
                 for key, value in (storage.all()).items():
