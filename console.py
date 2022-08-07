@@ -27,6 +27,35 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    def precmd(self, inp):
+        """ A function that checks for specified input format
+            and groups the input to create a proper command line
+        """
+        args = "\(\"(\S*)\"\,\ \"(\S*)\"\,\ (\S*)\)$"
+        fm = "^(\w*)\.(\w*)" + args
+        search_list = ["^(\w*)\.(\w*)\((\w*)\)$",
+                       "^(\w*)\.(\w*)\(\"(\S*)\"\)$", fm]
+        for search in search_list:
+            s = re.search(search, inp)
+            if s:
+                break
+        if not s:
+            return inp
+        model = s.group(1)
+        cmd = s.group(2)
+        args = s.group(3)
+        line = cmd + " " + model + " " + args
+        if len(s.groups()) > 3:
+            if s.group(4):
+                line += " " + s.group(4)
+        if len(s.groups()) > 4:
+            if s.group(5):
+                line += " " + s.group(5)
+
+        self.onecmd(line)
+        return ""
+
+
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
