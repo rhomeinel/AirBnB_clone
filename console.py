@@ -121,11 +121,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif inpu[0] in class_check:
             if len(inpu) < 2:
-                print("**instance id missing**")
+                print("** instance id missing **")
             elif len(inpu) < 3:
-                print("**attribute name missing**")
+                print("** attribute name missing **")
             elif len(inpu) < 4:
-                print("**value missing**")
+                print("** value missing **")
             else:
                 key = "{}.{}".format(inpu[0], inpu[1])
                 if key in objs:
@@ -135,9 +135,9 @@ class HBNBCommand(cmd.Cmd):
                     objs[key].save()
                     models.storage.reload()
                 else:
-                    print("**no instance found**")
+                    print("** no instance found **")
         else:
-            print("**class doesn't exist**")
+            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
