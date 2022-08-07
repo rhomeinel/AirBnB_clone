@@ -6,6 +6,7 @@ import cmd
 import sys
 import json
 import models
+from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
@@ -139,6 +140,26 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
         else:
             print("** class doesn't exist **")
+
+    def do_update_dict(self, arg):
+        '''Updates an object using a dictionary'''
+        args = arg.split(' ', 1)
+        oid = args[0]
+        dict1 = args[1]
+        if dict1 is None or dict1 == '':
+            print("** Dictionary missing **")
+            return
+        instances = storage.all()
+        if oid not in instances:
+            print("** no instance found **")
+            return
+        dict1 = json.loads(dict1)
+        utime = datetime.now()
+        dict1['updated_at'] = utime
+        instances[oid].update(dict1)
+        storage.new(instances)
+        storage.save()
+        return
 
 
 if __name__ == '__main__':
