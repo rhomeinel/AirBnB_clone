@@ -9,7 +9,7 @@ models = {}
 
 
 def import_models():
-    '''import modules after instantiating a storage instace
+    '''import modules after instantiating a storage instance
     to fix circular imports'''
     global models
     from .base_model import BaseModel
