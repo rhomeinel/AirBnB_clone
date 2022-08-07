@@ -50,7 +50,6 @@ class BaseModel:
         """
         returns a dictionary containing all keys/values of __dict__
         of the instance:
-
         - only instance attributes set will be returned
         - a key __class__ is added with the class name of the object
         - created_at and updated_at must be converted to string object in ISO
