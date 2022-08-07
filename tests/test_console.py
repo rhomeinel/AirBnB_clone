@@ -4,15 +4,15 @@
 from console import HBNBCommand
 from models.engine.file_storage import FileStorage
 import unittest
+from io import StringIO
+import sys
 import datetime
 from unittest.mock import patch
-import sys
-from io import StringIO
 import re
 import os
 
 
-class Test_01_Basic(unittest.TestCase):
+class Test_CommanConsole(unittest.TestCase):
     """Test Console Module (console.py)"""
 
     def do_quit(self, line):
