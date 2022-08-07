@@ -2,8 +2,6 @@
 """File Storage Class"""
 
 import json
-import os
-import datetime
 from models.base_model import BaseModel
 from models.state import State
 from models.city import City
@@ -25,27 +23,28 @@ class FileStorage:
 
     def new(self, obj):
         """ put object in __objects """
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        type(self).__objects[key] = obj
+        k = "{}.{}".format(obj.__class__.__name__, obj.id)
+        type(self).__objects[k] = obj
 
     def save(self):
         """ save the objects dictionary into file
         make serializable dict objects """
         temp = {}
-        for key, value in type(self).__objects.items():
-            temp[key] = value.to_dict()
+        for k, v in type(self).__objects.items():
+            temp[k] = v.to_dict()
         with open(type(self).__file_path, 'w', encoding='utf-8') as f:
-            f.write(json.dump(temp) + '\n')
+            f.write(json.dumps(temp) + '\n')
 
-    def classes(self):
-        """returns objects from valid classes and their refs"""
-        classes = {'BaseModel': BaseModel, 'State': State, 'City': City,
+    def reload(self):
+        """reload objects from file"""
+
+        clslist = {'BaseModel': BaseModel, 'State': State, 'City': City,
                    'Amenity': Amenity, 'Place': Place, 'Review': Review,
                    'User': User}
         try:
             with open(type(self).__file_path, 'r', encoding='utf-8') as f:
                 temp = json.load(f)
-                for key, value in temp.items():
-                    self.new(classes[value['__class__']](**value))
+                for k, v in temp.items():
+                    self.new(clslist[v['__class__']](**v))
         except FileNotFoundError:
             pass
