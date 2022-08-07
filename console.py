@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
                     del storage.all()[key]
                     storage.save()
 
-    def do_all(self, usr_in):
+    def do_all(self, name):
         """
         Prints all string representation of all instances
         bases on a class name
