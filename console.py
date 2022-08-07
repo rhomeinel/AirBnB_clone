@@ -24,12 +24,10 @@ class HBNBCommand(cmd.Cmd):
     This is the entry point to the command interpreter
     """
 
-    intro = "Welcome to The Console"
     prompt = "(hbnb) "
 
     def do_quit(self, line):
-        """Quit command to exit the HBNB console"""
-        print("Thank you for using The Console")
+        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, line):
