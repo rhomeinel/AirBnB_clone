@@ -12,7 +12,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initializes the Base instance"""
         datenow = datetime.now()
-        if kwargs:
+      if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
                     continue
@@ -26,7 +26,7 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """String representation of an instance"""
+        """String representation"""
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
                                      self.__dict__)
 
