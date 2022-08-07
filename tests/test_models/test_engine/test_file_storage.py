@@ -5,13 +5,10 @@ import json
 import re
 from uuid import UUID, uuid4
 from datetime import datetime
-from time import sleep
 import os
+from models import FileStorage, base_model
 
-from models import storage, BaseModel, FileStorage
-
-
-class TestFileStorage(TestCase):
+class FileStorage(TestCase):
     ''' tests FileStorage class '''
     def test_5(self):
         ''' tests task 4 '''
