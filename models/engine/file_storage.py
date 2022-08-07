@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 ''' module for FileStorage class '''
 import json
-from os.path import isfile
+import models.storage
 
 
 class FileStorage:
@@ -15,17 +15,17 @@ class FileStorage:
 
     def all(self):
         ''' gets all objects '''
-        return self.__objects
+        return FilesStorage.__objects
 
     def new(self, obj):
         ''' registers a new object '''
         key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         ''' saves all objects to a file '''
-        with open(self.__file_path, 'w') as file:
-            r_objs = self.__objects
+        with open(FileStorage.__file_path, 'w') as file:
+            r_objs = FileStorage.__objects
             objs = {}
             for k in r_objs:
                 v = r_objs[k]
@@ -35,10 +35,10 @@ class FileStorage:
     def reload(self):
         """reload method deserializes the JSON file to __objects"""
         try:
-            with open(self.__file_path, 'r', encoding='utf-8') as f:
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
                 json_dict = json.load(f)
                 for obj_dict in json_dict.values():
                     cls = obj_dict['__class__']
                     self.new(eval('{}({})'.format(cls, '**obj_dict')))
         except FileNotFoundError:
-            pass
+            return

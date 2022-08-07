@@ -2,7 +2,7 @@
 ''' module for BaseModel class '''
 from uuid import uuid4
 from datetime import datetime
-from . import storage
+from __init__ import FileStorage
 
 
 class BaseModel:
@@ -17,14 +17,14 @@ class BaseModel:
                     setattr(self, k, kwargs[k])
         else:
             self.id = str(uuid4())
-            self.created_at = datetime.utcnow()
+            self.created_at = datetime.today()
             self.updated_at = self.created_at.replace()
-            storage.new(self)
+            models.storage.new(self)
 
     def save(self):
         ''' saves a model '''
-        self.updated_at = datetime.utcnow()
-        storage.save()
+        self.updated_at = datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         ''' returns a dictionary representation of the model '''
