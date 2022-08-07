@@ -1,57 +1,38 @@
 #!/usr/bin/python3
-"""
-Contains the FileStorage class model
-"""
+''' module for FileStorage class '''
 import json
-
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
+from os.path import isfile
+import models
 
 
 class FileStorage:
-    """
-    serializes instances to a JSON file and
-    deserializes JSON file to instances
-    """
-
-    __file_path = "file.json"
+    ''' class for persistent storage '''
+    __file_path = 'file.json'
     __objects = {}
 
+    def __init__(self):
+        ''' initializes a storage engine '''
+        pass
+
     def all(self):
-        """
-        Returns the dictionary __objects
-        """
+        ''' gets all objects '''
         return self.__objects
 
     def new(self, obj):
-        """
-        sets in __objects the `obj` with key <obj class name>.id
-        """
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        ''' registers a new object '''
+        key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
-        """
-        Serialize __objects to the JSON file
-        """
-        with open(self.__file_path, mode="w") as f:
-            dict_storage = {}
-            for k, v in self.__objects.items():
-                dict_storage[k] = v.to_dict()
-            json.dump(dict_storage, f)
+        ''' saves all objects to a file '''
+        with open(self.__file_path, 'w') as file:
+            r_objs = self.__objects
+            objs = {}
+            for k in r_objs:
+                v = r_objs[k]
+                objs[k] = v.to_dict()
+            json.dump(objs, file)
 
     def reload(self):
-        """
-        Deserializes the JSON file to __objects
-        -> Only IF it exists!
-        """
-        try:
-            with open(self.__file_path, encoding="utf-8") as f:
-                for obj in json.load(f).values():
-                    self.new(eval(obj["__class__"])(**obj))
-        except FileNotFoundError:
-            return
+        ''' loads data from file '''
+        return 4
