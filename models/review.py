@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
-
-'''Review Class Module'''
+''' module for Review class '''
+from .base_model import BaseModel
 
 
 class Review(BaseModel):
-    '''Review Class Definition'''
-
-    place_id = ""
-    user_id = ""
-    text = ""
+    ''' a Review class '''
+    place_id = ''
+    user_id = ''
+    text = ''
