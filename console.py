@@ -190,6 +190,16 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
         return
 
+    def do_count(self, inp):
+        """ Returns the number of initiated instances of a class """
+        count = 0
+        objs = models.storage.all()
+        for key, value in objs.items():
+            name = key.split('.')
+            if inp == name[0]:
+                count += 1
+        print("{}".format(count))
+
 
 if __name__ == '__main__':
     class_check = {"Amenity", "BaseModel", "City" "Place", "Review",
