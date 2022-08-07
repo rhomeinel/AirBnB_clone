@@ -44,9 +44,9 @@ class TestAmenity(unittest.TestCase):
         """Tests the attributes of Amenity class."""
         attributes = storage.attributes()["Amenity"]
         o = Amenity()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+        for key, value in attributes.items():
+            self.assertTrue(hasattr(o, key))
+            self.assertEqual(type(getattr(o, key, None)), value)
 
 if __name__ == "__main__":
     unittest.main()
