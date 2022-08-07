@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 ''' module for BaseModel class '''
-from uuid import uuid4
-from datetime import datetime
-from __init__ import FileStorage
+
+import uuid
+import datetime
+from models import storage
 
 
 class BaseModel:
