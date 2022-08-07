@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
-
-'''Amenity Class Module'''
+''' module for Amenity class '''
+from .base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    '''Amenity Class Definition'''
-
-    name = ""
+    ''' an Amenity class '''
+    name = ''

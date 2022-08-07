@@ -1,9 +1,8 @@
-from models.base_model import BaseModel
-
-'''State Class Module'''
+#!/usr/bin/python3
+''' module for State class '''
+from .base_model import BaseModel
 
 
 class State(BaseModel):
-    '''State Class Definition'''
-
-    name = ""
+    ''' a State class '''
+    name = ''

@@ -1,14 +1,11 @@
 #!/usr/bin/python3
-
-from models.base_model import BaseModel
-
-'''User Class Module'''
+''' module for User class '''
+from .base_model import BaseModel
 
 
 class User(BaseModel):
-    '''User Class Definition'''
-
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    ''' a User class '''
+    email = ''
+    password = ''
+    first_name = ''
+    last_name = ''
