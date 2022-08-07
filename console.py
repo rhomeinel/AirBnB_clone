@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             _input = line.split(' ')
-            if _input[0] not in class_check():
+            if _input[0] not in class_check:
                 print("** class doesn't exist **")
             elif len(_input) < 2:
                 print("** instance id missing **")
