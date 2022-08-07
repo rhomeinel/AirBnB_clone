@@ -17,6 +17,7 @@ from models.place import Place
 from models.base_model import BaseModel
 from models.city import City
 
+
 class HBNBCommand(cmd.Cmd):
     """
     The class HBNBCommand
@@ -116,10 +117,11 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and id
         by adding or updating attribute(save the change into the JSON file)
         """
+        objs = models.storage.all()
         inpu = line.split()
         if line == "" or line is None:
             print("** class name missing **")
-        elif inpu[0] in self.class_list:
+        elif inpu[0] in class_check:
             if len(inpu) < 2:
                 print("**instance id missing**")
             elif len(inpu) < 3:
@@ -128,11 +130,12 @@ class HBNBCommand(cmd.Cmd):
                 print("**value missing**")
             else:
                 key = "{}.{}".format(inpu[0], inpu[1])
-                if key in storage.all():
+                if key in objs:
                     if type(inpu[3]) is dict:
-                        storage.all()[key].setattr(inpu[2], inpu[3])
+                        objs[key].setattr(inpu[2], inpu[3])
                     objs[key].__setattr__(inpu[2], inpu[3])
                     objs[key].save()
+                    models.storage.reload()
                 else:
                     print("**no instance found**")
         else:
