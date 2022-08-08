@@ -6,7 +6,6 @@ import cmd
 import sys
 import json
 import models
-from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
@@ -37,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """Ignore empty line"""
+        """Ingnore empty line"""
         pass
 
     def do_create(self, line):
@@ -101,12 +100,12 @@ class HBNBCommand(cmd.Cmd):
         bases on a class name
         """
         if name != "":
-            inputt = name.split(' ')
-            if inputt[0] not in class_check:
+            _input= name.split(' ')
+            if words[0] not in class_check:
                 print("** class doesn't exist **")
             else:
                 list_str = [str(obj) for key, obj in storage.all().items()
-                            if type(obj).__name__ == inputt[0]]
+                     if type(obj).__name__ == words[0]]
                 print(list_str)
         else:
             list_str = [str(obj) for key, obj in storage.all().items()]
