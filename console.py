@@ -40,20 +40,21 @@ class HBNBCommand(cmd.Cmd):
         """Ignore empty line"""
         pass
 
-    def do_create(self, line):
+    def do_create(self, user_input):
         """
         Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id.
         """
-        if line == "":
-            print("** class name is missing **")
-        elif line not in class_check:
-            new_obj = class_check[line[0]]()
+        if not user_input:
+            print(" class name missing ")
+        elif user_input in class_check:
+            _input = user_input.split()
+            new_obj = class_check[_input[0]]()
             new_obj.save()
             storage.reload()
             print(new_obj.id)
         else:
-            print(" class doesn't exist ")
+            print("** class doesn't exist **")
 
     def do_show(self, line):
         """
