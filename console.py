@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
         (to the JSON file) and prints the id.
         """
         if not user_input:
-            print(" class name missing ")
+            print("** class name missing **")
         elif user_input in class_check:
             _input = user_input.split()
             new_obj = class_check[_input[0]]()
