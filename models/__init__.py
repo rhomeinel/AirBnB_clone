@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-''' creates a static FileStorage instance '''
-import engine.file_storage
+"""__init__ magic method for models directory"""
+from models.engine.file_storage import FileStorage
 
 
 storage = FileStorage()
