@@ -101,12 +101,12 @@ class HBNBCommand(cmd.Cmd):
         bases on a class name
         """
         if name != "":
-            _input = name.split(' ')
-            if words[0] not in class_check:
+            _inputt = name.split(' ')
+            if _inputt[0] not in class_check:
                 print("** class doesn't exist **")
             else:
                 list_str = [str(obj) for key, obj in storage.all().items()
-                            if type(obj).__name__ == words[0]]
+                            if type(obj).__name__ == _inputt[0]]
                 print(list_str)
         else:
             list_str = [str(obj) for key, obj in storage.all().items()]
