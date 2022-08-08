@@ -48,11 +48,12 @@ class HBNBCommand(cmd.Cmd):
         if line == "":
             print("** class name is missing **")
         elif line not in class_check:
-            print("** class does not exist **")
+            new_obj = class_check[line[0]]()
+            new_obj.save()
+            storage.reload()
+            print(new_obj.id)
         else:
-            new_class = BaseModel()
-            new_class.save()
-            print("{}".format(new_class.id))
+            print(" class doesn't exist ")
 
     def do_show(self, line):
         """
