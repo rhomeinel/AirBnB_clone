@@ -29,15 +29,15 @@ class Test_CommanConsole(unittest.TestCase):
         """Ingnore empty line"""
         pass
 
-    def do_create(self, line):
+    def do_create(self, user_input):
         """
         Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id.
         """
-        if not line:
+        if not user_input:
             print("** class name missing **")
-        elif line in class_check:
-            _input = line.split()
+        elif user_input in class_check:
+            _input = user_input.split()
             new_obj = class_check[_input[0]]()
             new_obj.save()
             storage.reload()
@@ -86,18 +86,22 @@ class Test_CommanConsole(unittest.TestCase):
                     del storage.all()[key]
                     storage.save()
 
-    def do_all(self, usr_in):
-        """Prints all instances based on a class name"""
-        if name:
-            if name in class_check:
-                for key, value in (storage.all()).items():
-                    if name in key:
-                        print(value)
-            else:
+    def do_all(self, name):
+        """
+        Prints all string representation of all instances
+        bases on a class name
+        """
+        if name != "":
+            _inputt = name.split(' ')
+            if _inputt[0] not in class_check:
                 print("** class doesn't exist **")
+            else:
+                list_str = [str(obj) for key, obj in storage.all().items()
+                            if type(obj).__name__ == _inputt[0]]
+                print(list_str)
         else:
-            for value in storage.all().values():
-                print(value)
+            list_str = [str(obj) for key, obj in storage.all().items()]
+            print(list_str)
 
     def do_update(self, line):
         """
