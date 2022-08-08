@@ -1,8 +1,15 @@
-# AirBnB Clone
+# 0x00. AirBnB clone - The console
 So this project is the first step towards building a first full web application (which is an AirBnB clone). This first step consists of a custom command-line interface for data management, and the base classes for the storage of this data.
 
-## Step 1: Write a command interpreter (Console)
+## Step 1: Write a command interpreter (The Console)
+### 0x00.AirBnB Clone - The Console
 
+## Functionalities of this command interpreter:
+- Create a new object (ex: a new User or a new Place)
+- Retrieve an object from a file, a database etc...
+- Do operations on objects (count, compute stats, etc...)
+- Update attributes of an object
+- Destroy an object
 
 ## Models
 
