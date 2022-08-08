@@ -6,7 +6,7 @@ import re
 from uuid import UUID, uuid4
 from datetime import datetime
 from time import sleep
-from models.base_model import BaseModel
+import test_models.test_base_model
 
 
 class TestBaseModel(TestCase):

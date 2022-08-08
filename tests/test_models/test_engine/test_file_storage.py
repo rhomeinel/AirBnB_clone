@@ -6,9 +6,10 @@ import re
 from uuid import UUID, uuid4
 from datetime import datetime
 import os
-from models import FileStorage, base_model
+from test_models import TestFileStorage, test_base_model
 
-class FileStorage(TestCase):
+
+class TestFileStorage(TestCase):
     ''' tests FileStorage class '''
     def test_5(self):
         ''' tests task 4 '''
