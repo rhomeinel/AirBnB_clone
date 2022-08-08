@@ -45,14 +45,14 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id.
         """
-        if line == "":
-            print("** class name is missing **")
-        elif line != "BaseModel":
-            print("** class does not exist **")
+        if line == "" or line is None:
+            print("** class name missing **")
+        elif line not in class_check:
+            print("** class doesn't exist **")
         else:
-            new_model = BaseModel()
-            new_model.save()
-            print("{}".format(new_model.id))
+            new_class = class_check[line]()
+            new_class.save()
+            print(new_class.id)
 
     def do_show(self, line):
         """
