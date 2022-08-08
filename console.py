@@ -37,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """Ingnore empty line"""
+        """Ignore empty line"""
         pass
 
     def do_create(self, line):
@@ -45,14 +45,14 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id.
         """
-        if line == "" or line is None:
-            print("** class name missing **")
+        if line == "":
+            print("** class name is missing **")
         elif line not in class_check:
-            print("** class doesn't exist **")
+            print("** class does not exist **")
         else:
-            new_class = class_check[line]()
+            new_class = BaseModel()
             new_class.save()
-            print(new_class.id)
+            print("{}".format(new_class.id))
 
     def do_show(self, line):
         """
