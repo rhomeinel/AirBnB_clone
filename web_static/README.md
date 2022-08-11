@@ -11,3 +11,6 @@ Files | Description
 [Styles](./styles/) | This folder contains all css files.
 [Images](./images/) | Images for this project
 ---------------------------------------------
+
+## Author
+[Rhomeinel](https://github.com/rhomeinel) 
